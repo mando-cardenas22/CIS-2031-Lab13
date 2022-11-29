@@ -12,11 +12,12 @@ struct List {
 
 //Prints the list to the provided output stream
 void print( List* l, std::ostream &out){
-    while ( l != NULL ){
-        //As long as l is not null....
-        out << l->value; //Print out it's value
-        l = l->next; //Move on to the next value
-    }
+    if ( l == NULL)
+        return;
+    out << l->value;
+    print(l->next, out);
+    
+
 }
 
 //Returns the number of items in the list
@@ -44,14 +45,19 @@ string get(List* l, int index){
 
 //Returns true if the list contains needle
 bool contains(List* l, string needle){
-    while ( l != NULL ){
-        if ( l->value == needle ){
-            return true;
-        }
-        l = l->next;
+    if(l == NULL)
+    return 0;
+    if (l->value == needle ){
+        return true;
+    }else{
+    return contains(l->next, needle);
     }
-    return false;
-}
+        
+
+
+    }
+   
+
 
 //Add an item to the list
 void insertAt(List* &list, int pos, string value){
